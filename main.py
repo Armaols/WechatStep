@@ -37,7 +37,7 @@ def getWeather():
         r = requests.get(url=url, headers=hea)
         if r.status_code == 200:
             result = r.text
-            res = json.loads(result)
+            res = json.loads(r)
             if "晴" in res['data']['tq']:
                 K = K_dict["晴"]
             elif "多云" in res['data']['tq']:
