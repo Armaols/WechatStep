@@ -56,7 +56,7 @@ def getWeather():
                 K = K_dict["大暴雨"]
             elif "特大暴雨" in res['data']['tq']:
                 K = K_dict["特大暴雨"]
-            type = res['data']['tq']:
+            type = res['data']['tq']
         else:
             print("获取天气情况出错")
 
