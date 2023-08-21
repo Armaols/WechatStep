@@ -38,25 +38,25 @@ def getWeather():
         if r.status_code == 200:
             result = r.text
             res = json.loads(result)
-            if "晴" in res['data']['forecast']['tq']:
+            if "晴" in res['data']['tq']:
                 K = K_dict["晴"]
-            elif "多云" in res['data']['forecast']['tq']:
+            elif "多云" in res['data']['tq']:
                 K = K_dict["多云"]
-            elif "阴" in res['data']['forecast']['tq']:
+            elif "阴" in res['data']['tq']:
                 K = K_dict["阴"]
-            elif "小雨" in res['data']['forecast']['tq']:
+            elif "小雨" in res['data']['tq']:
                 K = K_dict["小雨"]
-            elif "中雨" in res['data']['forecast']['tq']:
+            elif "中雨" in res['data']['tq']:
                 K = K_dict["中雨"]
-            elif "大雨" in res['data']['forecast']['tq']:
+            elif "大雨" in res['data']['tq']:
                 K = K_dict["大雨"]
-            elif "暴雨" in res['data']['forecast']['tq']:
+            elif "暴雨" in res['data']['tq']:
                 K = K_dict["暴雨"]
-            elif "大暴雨" in res['data']['forecast']['tq']:
+            elif "大暴雨" in res['data']['tq']:
                 K = K_dict["大暴雨"]
-            elif "特大暴雨" in res['data']['forecast']['tq']:
+            elif "特大暴雨" in res['data']['tq']:
                 K = K_dict["特大暴雨"]
-            type = res['data']['forecast']['tq']:
+            type = res['data']['tq']:
         else:
             print("获取天气情况出错")
 
