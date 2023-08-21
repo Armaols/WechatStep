@@ -17,7 +17,7 @@ area = sys.argv[4]
 # 以下如果看不懂直接默认就行只需改上面
 
 # 系数K查询到天气后降低步数比率，如查询得到设置地区为多云天气就会在随机后的步数乘0.9作为最终修改提交的步数
-K_dict = {"多云": 0.9, "阴": 0.8, "小雨": 0.7, "中雨": 0.5, "大雨": 0.4, "暴雨": 0.3, "大暴雨": 0.2, "特大暴雨": 0.2}
+K_dict = {"晴": 0.9, "多云": 0.8, "阴": 0.7, "小雨": 0.6, "中雨": 0.5, "大雨": 0.4, "暴雨": 0.3, "大暴雨": 0.2, "特大暴雨": 0.2}
 
 # 北京时间
 time_bj = datetime.datetime.today() + datetime.timedelta(hours=8)
@@ -32,29 +32,31 @@ def getWeather():
         return
     else:
         global K, type
-        url = 'http://wthrcdn.etouch.cn/weather_mini?city=' + area
+        url = 'http://api.yytianqi.com/observe?city=CH270101&key=t9vjs0ch0e35apip'
         hea = {'User-Agent': 'Mozilla/5.0'}
         r = requests.get(url=url, headers=hea)
         if r.status_code == 200:
             result = r.text
             res = json.loads(result)
-            if "多云" in res['data']['forecast'][0]['type']:
+            if "晴" in res['data']['forecast']['tq']:
+                K = K_dict["晴"]
+            elif "多云" in res['data']['forecast']['tq']:
                 K = K_dict["多云"]
-            elif "阴" in res['data']['forecast'][0]['type']:
+            elif "阴" in res['data']['forecast']['tq']:
                 K = K_dict["阴"]
-            elif "小雨" in res['data']['forecast'][0]['type']:
+            elif "小雨" in res['data']['forecast']['tq']:
                 K = K_dict["小雨"]
-            elif "中雨" in res['data']['forecast'][0]['type']:
+            elif "中雨" in res['data']['forecast']['tq']:
                 K = K_dict["中雨"]
-            elif "大雨" in res['data']['forecast'][0]['type']:
+            elif "大雨" in res['data']['forecast']['tq']:
                 K = K_dict["大雨"]
-            elif "暴雨" in res['data']['forecast'][0]['type']:
+            elif "暴雨" in res['data']['forecast']['tq']:
                 K = K_dict["暴雨"]
-            elif "大暴雨" in res['data']['forecast'][0]['type']:
+            elif "大暴雨" in res['data']['forecast']['tq']:
                 K = K_dict["大暴雨"]
-            elif "特大暴雨" in res['data']['forecast'][0]['type']:
+            elif "特大暴雨" in res['data']['forecast']['tq']:
                 K = K_dict["特大暴雨"]
-            type = res['data']['forecast'][0]['type']
+            type = res['data']['forecast']['tq']:
         else:
             print("获取天气情况出错")
 
